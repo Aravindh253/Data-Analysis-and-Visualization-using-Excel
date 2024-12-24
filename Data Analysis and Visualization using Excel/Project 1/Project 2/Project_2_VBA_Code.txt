@@ -1,0 +1,52 @@
+1. Create a Macro for Data Formatting (Conditional Formatting, Freezing Panes) 
+of workbook as same will be applied to the data of next quarter
+
+Sub MultipleConditionalFormattingExample()
+Dim MyRange As Range
+'Create range object
+Set MyRange = Range("A1:DR307511")
+'Delete previous conditional formats
+MyRange.FormatConditions.Delete
+'Add first rule
+MyRange.FormatConditions.Add Type:=xlCellValue, Operator:=xlBetween, _
+        Formula1:="=100", Formula2:="=150"
+MyRange.FormatConditions(1).Interior.Color = RGB(255, 0, 0)
+'Add second rule
+MyRange.FormatConditions.Add Type:=xlCellValue, Operator:=xlLess, _
+        Formula1:="=100"
+MyRange.FormatConditions(2).Interior.Color = vbBlue
+'Add third rule
+MyRange.FormatConditions.Add Type:=xlCellValue, Operator:=xlGreater, _
+        Formula1:="=150"
+MyRange.FormatConditions(3).Interior.Color = vbYellow
+End Sub
+
+
+
+2. Create VBA Code to convert selected data into pdf from applicant data
+
+
+Public Sub PDF()
+ThisWorkbook.Sheets(Array("Dashboard")).Select
+
+ActiveSheet.ExportAsFixedFormat _
+    Type:=xlTypePDF, _
+    Filename:="Sample Excel File Saved As PDF", _
+    Quality:=xlQualityStandard, _
+    IncludeDocProperties:=True, _
+    IgnorePrintAreas:=False, _
+    OpenAfterPublish:=True
+
+
+End Sub
+
+
+
+3. Check Spelling mistakes in the workbook using VBA Code
+
+Sub Highlight_Misspelled_Words()
+Dim cell As Range
+For Each cell In ActiveSheet.UsedRange
+  If Not Application.CheckSpelling(Word:=cell.Text) Then cell.Interior.ColorIndex = 6
+Next
+End Sub

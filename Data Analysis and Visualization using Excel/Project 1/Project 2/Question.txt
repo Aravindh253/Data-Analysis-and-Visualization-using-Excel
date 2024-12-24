@@ -1,0 +1,3 @@
+Analyzing the choice of career for the Alumni of Engineering College.
+
+In this project, students are expected to analyze the career choices of alumni from an institution based on given data.
